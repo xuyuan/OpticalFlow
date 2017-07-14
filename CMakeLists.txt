@@ -80,6 +80,12 @@ if(OpenCV_FOUND)
       ${OpenCV_LIBS}
       ${klt_feature_tracker_LIBS}
     )
+    
+    message(STATUS "Building of example")
+    # example
+    add_executable(of_example src/example.cpp)
+    # Link your application with OpenCV libraries
+    target_link_libraries(of_example OpticalFlow)
 else()
     message(STATUS "Building ${PROJECT_NAME} without OpenCV")
 
