@@ -40,7 +40,9 @@ int main(int argc, char* argv[])
         float focal_length = 0.05; // TODO
         OpticalFlowOpenCV of(focal_length, focal_length);
         //OpticalFlowPX4 of(focal_length, focal_length);
+        
         Rect roi = Rect((cap_width - cap_height) / 2, 0, cap_height, cap_height);
+        //Rect roi = Rect((cap_width - DEFAULT_IMAGE_WIDTH) / 2, (cap_height - DEFAULT_IMAGE_HEIGHT) / 2, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
         
         double last_t_begin = 0;
         double first_frame_time = (double)getTickCount();
@@ -60,7 +62,11 @@ int main(int argc, char* argv[])
             
             Mat image_roi = image(roi);
             resize(image_roi, bgr, Size(DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT));
+            
+            //bgr = image(roi);
+            
             cvtColor(bgr, gray, CV_BGR2GRAY);
+            
             double t_p_begin = (double)getTickCount();
             int dt =  (t_begin - last_t_begin) * 1e6 / getTickFrequency();
             
